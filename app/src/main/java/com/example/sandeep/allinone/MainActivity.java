@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     int date1= date;
 
-    int totalTime = 15884; //in miliseconds
+    int totalTime = 15885; //in miliseconds
 
     boolean isUsedToday = false;
 
