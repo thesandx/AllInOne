@@ -25,11 +25,14 @@ public class Facebook extends Fragment {
     }
     WebView mWebView;
 
+    public long startTime,endTime;
+
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        startTime=System.currentTimeMillis();
 
         View view=inflater.inflate(R.layout.fragment_facebook,container,false);
         // Inflate the layout for this fragment
@@ -77,4 +80,11 @@ public class Facebook extends Fragment {
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        endTime=System.currentTimeMillis();
+        long timeSpent=endTime-startTime;
+
+    }
 }

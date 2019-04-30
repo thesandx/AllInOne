@@ -38,7 +38,7 @@ public class Twitter extends Fragment {
         webSettings.setJavaScriptEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
-        mWebView.setWebViewClient(new WebViewClient());
+            mWebView.setWebViewClient(new WebViewClient());
 
 
 

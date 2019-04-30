@@ -21,7 +21,7 @@
         </item>
 
         <item android:id="@+id/timer_id"
-            android:title="Time Limit">
+            android:title="Any Other Site">
         </item>
 
     </group>

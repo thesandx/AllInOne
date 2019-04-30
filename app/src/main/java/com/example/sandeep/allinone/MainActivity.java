@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
         navigationView =  findViewById(R.id.navigation_view);
 
 
-        Toast.makeText(MainActivity.this,"In oncreate",Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
 
 
     /**    SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -142,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new Timer());
                         fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("Timer");
+                        getSupportActionBar().setTitle("Website");
                         menuItem.setChecked(true);
                         // drawerLayout.closeDrawers();
                         break;
@@ -168,8 +168,10 @@ public class MainActivity extends AppCompatActivity {
         mTextViewCountDown = findViewById(R.id.text_view_countdown);
 
         mButtonSet = findViewById(R.id.button_set);
-        mButtonStartPause = findViewById(R.id.button_start_pause);
-        mButtonReset = findViewById(R.id.button_reset);
+       // mButtonStartPause = findViewById(R.id.button_start_pause);
+       // mButtonReset = findViewById(R.id.button_reset);
+
+        mTimerRunning=false;
 
         mButtonSet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        mButtonStartPause.setOnClickListener(new View.OnClickListener() {
+     /**   mButtonStartPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (mTimerRunning) {
@@ -214,12 +216,13 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 resetTimer();
             }
-        });
+        });  **/
     }
 
     private void setTime(long milliseconds) {
         mStartTimeInMillis = milliseconds;
-        resetTimer();
+        mTimeLeftInMillis = milliseconds;
+       // resetTimer();
         closeKeyboard();
     }
 
@@ -231,8 +234,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTick(long millisUntilFinished) {
                 mTimeLeftInMillis = millisUntilFinished;
-                if(mTimeLeftInMillis<50000){
-                    Toast.makeText(MainActivity.this, "You have only "+mTimeLeftInMillis/1000+" s left", Toast.LENGTH_SHORT).show();
+                if(mTimeLeftInMillis<59000){
+                   Toast.makeText(MainActivity.this, "You have only "+mTimeLeftInMillis/1000+" s left", Toast.LENGTH_SHORT).show();
                     //pauseTimer();
                 }
                 updateCountDownText();
@@ -243,12 +246,12 @@ public class MainActivity extends AppCompatActivity {
                 mTimerRunning = false;
                 updateWatchInterface();
                 Toast.makeText(MainActivity.this, "Time is Up!!!", Toast.LENGTH_SHORT).show();
-                isUsedToday = true;
-                date1 = date+1;
+               // isUsedToday = true;
+               // date1 = date+1;
 
-                if(date == date1 && isUsedToday){
+               // if(date == date1 && isUsedToday){
                     finish();
-                }
+               // }
 
 
               //  SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -268,7 +271,7 @@ public class MainActivity extends AppCompatActivity {
         updateWatchInterface();
     }
 
-    private void pauseTimer() {
+  /**  private void pauseTimer() {
         mCountDownTimer.cancel();
         mTimerRunning = false;
         updateWatchInterface();
@@ -278,7 +281,7 @@ public class MainActivity extends AppCompatActivity {
         mTimeLeftInMillis = mStartTimeInMillis;
         updateCountDownText();
         updateWatchInterface();
-    }
+    }  **/
 
 
     private void updateCountDownText() {
@@ -302,16 +305,17 @@ public class MainActivity extends AppCompatActivity {
         if (mTimerRunning) {
             mEditTextInput.setVisibility(View.INVISIBLE);
             mButtonSet.setVisibility(View.INVISIBLE);
-            mButtonReset.setVisibility(View.INVISIBLE);
-            mButtonStartPause.setText("Pause");
-            mButtonStartPause.setEnabled(false);
+           // mButtonStartPause.setVisibility(View.INVISIBLE);
+           // mButtonStartPause.setText("Pause");
+          //  mButtonStartPause.setEnabled(false);
 
 
         } else {
             mEditTextInput.setVisibility(View.VISIBLE);
             mButtonSet.setVisibility(View.VISIBLE);
-            mButtonStartPause.setText("Start");
-            mButtonReset.setEnabled(false);
+           // mButtonStartPause.setVisibility(View.INVISIBLE);
+          //  mButtonStartPause.setText("Start");
+          //  mButtonReset.setEnabled(false);
 
          /**   if (mTimeLeftInMillis < 1000) {
                 mButtonStartPause.setVisibility(View.INVISIBLE);
@@ -337,7 +341,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    @Override
+  /**  @Override
     public void onPause() {
         super.onPause();
 
@@ -363,10 +367,10 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(this, "Time Left is "+mTimeLeftInMillis/1000+" seconds",Toast.LENGTH_SHORT).show();
 
         }
-    }
+    }   **/
 
 
-    public void onResume()
+  /**  public void onResume()
     {
         super.onResume();
 
@@ -409,10 +413,10 @@ public class MainActivity extends AppCompatActivity {
            // mCountDownTimer.start();
 
         }
-    }
+    }   **/
 
-    @Override
-    public void onStart() {
+    /**   @Override
+   public void onStart() {
         super.onStart();
 
 
@@ -469,7 +473,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
+**/
 
 
     @Override
@@ -480,7 +484,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         this.doubleBackToExitPressedOnce = true;
-        pauseTimer();
+       // pauseTimer();
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler().postDelayed(new Runnable() {
