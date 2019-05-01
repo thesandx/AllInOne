@@ -6,10 +6,13 @@ import android.content.BroadcastReceiver;
 import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -59,16 +62,18 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     FragmentTransaction fragmentTransaction;
     NavigationView navigationView;
-
-
-    //DrawerLayout drawerLayout;
+    DrawerLayout drawerLayout;
+    ActionBarDrawerToggle actionBarDrawerToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar =  findViewById(R.id.toolbar);
+        drawerLayout=findViewById(R.id.drawerlayout);
         setSupportActionBar(toolbar);
+        actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
+
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container, new Home());
@@ -78,6 +83,8 @@ public class MainActivity extends AppCompatActivity {
 
 
         Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
+
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
 
     /**    SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -105,7 +112,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Home");
                         menuItem.setChecked(true);
-                        //drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
 
                         break;
 
@@ -115,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
-                        //drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
 
                         break;
 
@@ -126,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
-                        // drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         break;
 
                     case R.id.insta_id:
@@ -135,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Instagram");
                         menuItem.setChecked(true);
-                        // drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         break;
 
                     case R.id.timer_id:
@@ -144,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Website");
                         menuItem.setChecked(true);
-                        // drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
                         break;
 
                     case R.id.About_id:
@@ -153,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("About");
                         menuItem.setChecked(true);
-                        //drawerLayout.closeDrawers();
+                        drawerLayout.closeDrawers();
 
                         break;
 
@@ -341,7 +348,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-  /**  @Override
+    @Override
+    protected void onPostCreate(@Nullable Bundle savedInstanceState) {
+        super.onPostCreate(savedInstanceState);
+        actionBarDrawerToggle.syncState();
+
+
+    }
+
+
+    /**  @Override
     public void onPause() {
         super.onPause();
 

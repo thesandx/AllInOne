@@ -7,12 +7,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
+    android:id="@+id/drawerlayout"
+
     >
 
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@drawable/mainbg">
         <!-- TODO: Update blank fragment layout -->
         <EditText
             android:id="@+id/edit_text_input"
@@ -21,6 +24,7 @@
             android:layout_above="@+id/text_view_countdown"
             android:layout_centerHorizontal="true"
             android:hint="Minutes"
+            android:textColorHint="#FF2600"
             android:inputType="number"
             android:maxLength="4" />
 
@@ -66,10 +70,6 @@
 
 
 
-
-
-
-
    <LinearLayout
        android:layout_width="match_parent"
        android:layout_height="match_parent"
@@ -96,7 +96,8 @@
         android:layout_height="match_parent"
         android:id="@+id/navigation_view"
         android:layout_gravity="start"
-        app:menu="@menu/drawer_menu">
+        app:menu="@menu/drawer_menu"
+        app:headerLayout="@layout/navigation_header">
 
     </android.support.design.widget.NavigationView>
 

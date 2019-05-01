@@ -8,9 +8,42 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:text="@string/About"
-        android:textSize="50dp"
-        android:textColor="#39bcd6"/>
+        android:textSize="40dp"
+        android:textColor="#FF5722"
+        android:layout_marginLeft="30dp"/>
+
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Made by:"
+        android:textSize="30dp"
+        android:layout_marginTop="410dp"
+        android:textColor="#394ED6"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="450dp"
+        android:text="Sandeep Kumar Jha"
+        android:textSize="30dp"
+        android:textColor="#FF5722"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="480dp"
+        android:text="Sumit Kumar"
+        android:textSize="30dp"
+
+        android:textColor="#D63982"/>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="510dp"
+        android:text="Saurabh Bhatt"
+        android:textSize="30dp"
+        android:textColor="#4CAF50"/>
 
 </FrameLayout>

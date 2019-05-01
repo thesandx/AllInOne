@@ -1,7 +1,6 @@
 package com.example.sandeep.allinone;
 
 
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.v4.app.Fragment;
@@ -19,15 +18,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Locale;
-
-import static android.content.Context.INPUT_METHOD_SERVICE;
-import static android.content.Context.MODE_PRIVATE;
 
 
-/**
- * A simple {@link Fragment} subclass.
- */
 public class Timer extends Fragment {
 
     private EditText UrlEditText;
@@ -97,13 +89,9 @@ public class Timer extends Fragment {
                     }
                 });
 
-
             }
 
         });
-
-
-
 
      return view;
 

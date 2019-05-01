@@ -2,35 +2,40 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item android:id="@+id/home_id"
-            android:title="Home">
+            android:title="Home"
+            android:icon="@drawable/home">
         </item>
 
 
     </group>
     <group android:checkableBehavior="single">
         <item android:id="@+id/fb_id"
-              android:title="Facebook">
+              android:title="Facebook"
+            android:icon="@drawable/fbicon"
+            >
         </item>
 
         <item android:id="@+id/insta_id"
-            android:title="Instagram">
+            android:title="Instagram"
+            android:icon="@drawable/instaicon">
         </item>
 
         <item android:id="@+id/tweeter_id"
-            android:title="twitter">
+            android:title="twitter"
+            android:icon="@drawable/twittericon">
         </item>
 
         <item android:id="@+id/timer_id"
-            android:title="Any Other Site">
+            android:title="Any Other Site"
+            android:icon="@drawable/webicon">
         </item>
 
     </group>
 
     <group android:checkableBehavior="single">
         <item android:id="@+id/About_id"
-            android:title="About">
+            android:title="About"
+            android:icon="@drawable/about">
         </item>
-
-
     </group>
 </menu>
