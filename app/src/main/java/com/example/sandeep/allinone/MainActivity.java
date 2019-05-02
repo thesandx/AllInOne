@@ -190,8 +190,8 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 long millisInput = Long.parseLong(input) * 60000;
-                if (millisInput == 0) {
-                    Toast.makeText(MainActivity.this, "Please enter a positive number", Toast.LENGTH_SHORT).show();
+                if (millisInput == 0 || millisInput > 30*60*1000) {
+                    Toast.makeText(MainActivity.this, "Please enter number between 1 and 30", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -205,25 +205,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-     /**   mButtonStartPause.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mTimerRunning) {
-                    pauseTimer();
-                } else {
-                    startTimer();
-                }
-
-            }
-        });
-
-
-        mButtonReset.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                resetTimer();
-            }
-        });  **/
     }
 
     private void setTime(long milliseconds) {
@@ -253,42 +234,12 @@ public class MainActivity extends AppCompatActivity {
                 mTimerRunning = false;
                 updateWatchInterface();
                 Toast.makeText(MainActivity.this, "Time is Up!!!", Toast.LENGTH_SHORT).show();
-               // isUsedToday = true;
-               // date1 = date+1;
-
-               // if(date == date1 && isUsedToday){
-                    finish();
-               // }
-
-
-              //  SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-
-
-                // setTime(1*60*1000);
-
-                // finish();
-
-              /**  int id = android.os.Process.myPid();
-                android.os.Process.killProcess(id);**/
-                //here you can draw a poster to cover the application till next day
             }
         }.start();
 
         mTimerRunning = true;
         updateWatchInterface();
     }
-
-  /**  private void pauseTimer() {
-        mCountDownTimer.cancel();
-        mTimerRunning = false;
-        updateWatchInterface();
-    }
-
-    private void resetTimer() {
-        mTimeLeftInMillis = mStartTimeInMillis;
-        updateCountDownText();
-        updateWatchInterface();
-    }  **/
 
 
     private void updateCountDownText() {
@@ -312,30 +263,10 @@ public class MainActivity extends AppCompatActivity {
         if (mTimerRunning) {
             mEditTextInput.setVisibility(View.INVISIBLE);
             mButtonSet.setVisibility(View.INVISIBLE);
-           // mButtonStartPause.setVisibility(View.INVISIBLE);
-           // mButtonStartPause.setText("Pause");
-          //  mButtonStartPause.setEnabled(false);
-
 
         } else {
             mEditTextInput.setVisibility(View.VISIBLE);
             mButtonSet.setVisibility(View.VISIBLE);
-           // mButtonStartPause.setVisibility(View.INVISIBLE);
-          //  mButtonStartPause.setText("Start");
-          //  mButtonReset.setEnabled(false);
-
-         /**   if (mTimeLeftInMillis < 1000) {
-                mButtonStartPause.setVisibility(View.INVISIBLE);
-            } else {
-                mButtonStartPause.setVisibility(View.VISIBLE);
-            }
-
-            if (mTimeLeftInMillis < mStartTimeInMillis) {
-                mButtonReset.setVisibility(View.VISIBLE);
-            } else {
-                mButtonReset.setVisibility(View.INVISIBLE);
-            }
-          **/
 
         }
     }
@@ -355,142 +286,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-
-    /**  @Override
-    public void onPause() {
-        super.onPause();
-
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.putInt("currentDate",date);
-        editor.putInt("totalTime",totalTime);
-        editor.putLong("startTimeInMillis", mStartTimeInMillis);
-        editor.putLong("millisLeft", mTimeLeftInMillis);
-        editor.putBoolean("timerRunning", mTimerRunning);
-        editor.putLong("endTime", mEndTime);
-
-        editor.apply();
-
-        Toast.makeText(this, "In the onPause() event",Toast.LENGTH_SHORT).show();
-
-
-        if (mCountDownTimer != null) {
-           // mCountDownTimer.cancel();
-           // pauseTimer();
-            //mCountDownTimer.cancel();
-            Toast.makeText(this, "Time Left is "+mTimeLeftInMillis/1000+" seconds",Toast.LENGTH_SHORT).show();
-
-        }
-    }   **/
-
-
-  /**  public void onResume()
-    {
-        super.onResume();
-
-        Toast.makeText(this, "In the onResume() event",Toast.LENGTH_SHORT).show();
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-        SharedPreferences.Editor editor = prefs.edit();
-
-        editor.putLong("startTimeInMillis", mStartTimeInMillis);
-        editor.putLong("millisLeft", mTimeLeftInMillis);
-        editor.putBoolean("timerRunning", mTimerRunning);
-        editor.putLong("endTime", mEndTime);
-
-
-
-
-        int currentdate = prefs.getInt("currentDate",0);
-        int totaltime = prefs.getInt("totalTime",0);
-        Long timeLeft =prefs.getLong("millisLeft",0);
-
-        Toast.makeText(MainActivity.this,"Date is "+currentdate+" and time is "+totaltime/60000,Toast.LENGTH_LONG).show();
-
-        if(date == currentdate){
-            if(isUsedToday == true){
-                finish();
-            }
-        }
-        else{
-
-
-            editor.putInt("currentDate",date);
-            editor.apply();
-
-        }
-
-        editor.apply();
-
-        startTimer();
-
-        if (mCountDownTimer != null) {
-           // mCountDownTimer.start();
-
-        }
-    }   **/
-
-    /**   @Override
-   public void onStart() {
-        super.onStart();
-
-
-        Toast.makeText(MainActivity.this,"In onStart",Toast.LENGTH_SHORT).show();
-
-
-        SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
-
-        mStartTimeInMillis = prefs.getLong("startTimeInMillis", 600000);
-        mTimeLeftInMillis = prefs.getLong("millisLeft", mStartTimeInMillis);
-        mTimerRunning = prefs.getBoolean("timerRunning", false);
-
-        int currentdate = prefs.getInt("currentDate",0);
-        int totaltime = prefs.getInt("totalTime",0);
-        long timeleft = prefs.getLong("millisLeft",0);
-
-        if(date == currentdate){
-            if(isUsedToday == true){
-                finish();
-            }
-        }
-        else{
-            SharedPreferences.Editor editor = prefs.edit();
-
-            editor.putInt("currentDate",date);
-            editor.apply();
-
-        }
-
-
-
-
-        Toast.makeText(MainActivity.this,"Date is "+currentdate+" and time is "+totaltime+" time left is "+timeleft,Toast.LENGTH_LONG).show();
-
-
-
-
-        updateCountDownText();
-        updateWatchInterface();
-
-        if (mTimerRunning) {
-            mEndTime = prefs.getLong("endTime", 0);
-            mTimeLeftInMillis = mEndTime - System.currentTimeMillis();
-
-
-            if (mTimeLeftInMillis < 0) {
-                mTimeLeftInMillis = 0;
-                mTimerRunning = false;
-                updateCountDownText();
-                updateWatchInterface();
-            } else {
-                startTimer();
-            }
-        }
-
-    }
-**/
-
 
     @Override
     public void onBackPressed() {
