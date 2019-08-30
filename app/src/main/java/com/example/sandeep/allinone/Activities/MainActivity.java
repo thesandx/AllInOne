@@ -1,22 +1,13 @@
-package com.example.sandeep.allinone;
+package com.example.sandeep.allinone.Activities;
 
-import android.app.AlarmManager;
-import android.app.PendingIntent;
-import android.content.BroadcastReceiver;
-import android.content.SharedPreferences;
 import android.os.CountDownTimer;
 import android.os.Handler;
-import android.os.PersistableBundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
+
 import android.view.MenuItem;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -25,8 +16,22 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentTransaction;
+
+
+import com.example.sandeep.allinone.R;
+import com.example.sandeep.allinone.fragments.About;
+import com.example.sandeep.allinone.fragments.Facebook;
+import com.example.sandeep.allinone.fragments.Home;
+import com.example.sandeep.allinone.fragments.Instagram;
+import com.example.sandeep.allinone.fragments.Timer;
+import com.example.sandeep.allinone.fragments.Twitter;
+import com.google.android.material.navigation.NavigationView;
+
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -64,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
