@@ -1,8 +1,8 @@
-package com.example.sandeep.allinone;
+package com.example.sandeep.allinone.fragments;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,35 +11,37 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.sandeep.allinone.Activities.MainActivity;
+import com.example.sandeep.allinone.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Instagram extends Fragment {
+public class Twitter extends Fragment {
 
 
-    public Instagram() {
+    public Twitter() {
         // Required empty public constructor
-
     }
 
     WebView mWebView;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
-        View view=inflater.inflate(R.layout.fragment_instagram,container,false);
+        View view=inflater.inflate(R.layout.fragment_twitter,container,false);
         // Inflate the layout for this fragment
-        mWebView=(WebView) view.findViewById(R.id.InstawebView);
-        mWebView.loadUrl("https://www.instagram.com/");
+        mWebView=(WebView) view.findViewById(R.id.TwitterwebView);
+        mWebView.loadUrl("https://www.twitter.com/");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
-        mWebView.setWebViewClient(new WebViewClient());
+            mWebView.setWebViewClient(new WebViewClient());
 
 
 
@@ -65,6 +67,7 @@ public class Instagram extends Fragment {
                 return false;
             }
         });
+
 
 
 

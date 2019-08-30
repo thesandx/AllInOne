@@ -1,8 +1,8 @@
-package com.example.sandeep.allinone;
+package com.example.sandeep.allinone.fragments;
 
 
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,34 +11,41 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.sandeep.allinone.Activities.MainActivity;
+import com.example.sandeep.allinone.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Twitter extends Fragment {
+public class Facebook extends Fragment {
 
 
-    public Twitter() {
+    public Facebook() {
         // Required empty public constructor
     }
-
     WebView mWebView;
+
+    public long startTime,endTime;
+
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        startTime=System.currentTimeMillis();
+
+        View view=inflater.inflate(R.layout.fragment_facebook,container,false);
         // Inflate the layout for this fragment
-        View view=inflater.inflate(R.layout.fragment_twitter,container,false);
-        // Inflate the layout for this fragment
-        mWebView=(WebView) view.findViewById(R.id.TwitterwebView);
-        mWebView.loadUrl("https://www.twitter.com/");
+        mWebView=(WebView) view.findViewById(R.id.FbwebView);
+        mWebView.loadUrl("https://mbasic.facebook.com");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
-            mWebView.setWebViewClient(new WebViewClient());
+        mWebView.setWebViewClient(new WebViewClient());
 
 
 
@@ -68,7 +75,17 @@ public class Twitter extends Fragment {
 
 
 
+
+
+
         return view;
     }
 
+    @Override
+    public void onPause() {
+        super.onPause();
+        endTime=System.currentTimeMillis();
+        long timeSpent=endTime-startTime;
+
+    }
 }

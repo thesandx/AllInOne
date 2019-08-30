@@ -1,10 +1,8 @@
-package com.example.sandeep.allinone;
+package com.example.sandeep.allinone.fragments;
 
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.NotificationCompat;
+import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,31 +11,31 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import com.example.sandeep.allinone.Activities.MainActivity;
+import com.example.sandeep.allinone.R;
+
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Facebook extends Fragment {
+public class Instagram extends Fragment {
 
 
-    public Facebook() {
+    public Instagram() {
         // Required empty public constructor
+
     }
+
     WebView mWebView;
-
-    public long startTime,endTime;
-
-
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        startTime=System.currentTimeMillis();
-
-        View view=inflater.inflate(R.layout.fragment_facebook,container,false);
         // Inflate the layout for this fragment
-        mWebView=(WebView) view.findViewById(R.id.FbwebView);
-        mWebView.loadUrl("https://mbasic.facebook.com");
+
+        View view=inflater.inflate(R.layout.fragment_instagram,container,false);
+        // Inflate the layout for this fragment
+        mWebView=(WebView) view.findViewById(R.id.InstawebView);
+        mWebView.loadUrl("https://www.instagram.com/");
 
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
@@ -73,18 +71,7 @@ public class Facebook extends Fragment {
 
 
 
-
-
-
-
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        endTime=System.currentTimeMillis();
-        long timeSpent=endTime-startTime;
-
-    }
 }
