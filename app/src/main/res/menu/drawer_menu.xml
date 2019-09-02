@@ -37,5 +37,10 @@
             android:title="About"
             android:icon="@drawable/about">
         </item>
+
+        <item android:id="@+id/Logout_id"
+            android:title="LogOut"
+            android:icon="@drawable/about">
+        </item>
     </group>
 </menu>

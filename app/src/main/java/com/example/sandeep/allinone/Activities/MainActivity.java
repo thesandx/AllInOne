@@ -1,5 +1,6 @@
 package com.example.sandeep.allinone.Activities;
 
+import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.example.sandeep.allinone.R;
+import com.example.sandeep.allinone.SharedPrefence;
 import com.example.sandeep.allinone.fragments.About;
 import com.example.sandeep.allinone.fragments.Facebook;
 import com.example.sandeep.allinone.fragments.Home;
@@ -30,6 +32,7 @@ import com.example.sandeep.allinone.fragments.Instagram;
 import com.example.sandeep.allinone.fragments.Timer;
 import com.example.sandeep.allinone.fragments.Twitter;
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle actionBarDrawerToggle;
+    FirebaseAuth auth;
 
 
     @Override
@@ -86,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
         navigationView =  findViewById(R.id.navigation_view);
+
+        auth = FirebaseAuth.getInstance();
 
 
         Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
@@ -169,6 +175,16 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
 
                         break;
+
+                    case R.id.Logout_id:
+                        auth.signOut();
+                        new SharedPrefence(getApplicationContext()).logout();
+                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                        startActivity(i);
+                        finish();
+                        break;
+
+
 
                 }
                 return false;
