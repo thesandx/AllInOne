@@ -21,8 +21,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.LifecycleRegistryOwner;
+import androidx.lifecycle.Observer;
 
 
+import com.example.sandeep.allinone.ConnectionLiveData;
+import com.example.sandeep.allinone.Models.ConnectionModel;
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
 import com.example.sandeep.allinone.fragments.About;
@@ -74,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     FirebaseAuth auth;
 
+    public static final int MobileData = 2;
+    public static final int WifiData = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,6 +117,32 @@ public class MainActivity extends AppCompatActivity {
         Toast.makeText(MainActivity.this,"Date is "+date+" and time is "+totalTime/60000,Toast.LENGTH_LONG).show();
 
 **/
+
+
+        ConnectionLiveData connectionLiveData = new ConnectionLiveData(getApplicationContext());
+
+        connectionLiveData.observe(this, new Observer<ConnectionModel>() {
+            @Override
+            public void onChanged(ConnectionModel connection) {
+                if (connection.getIsConnected()){
+
+                    switch (connection.getType()){
+
+                        case WifiData:
+                            Toast.makeText(getApplicationContext(),"wifi on", Toast.LENGTH_SHORT).show();                            break;
+                        case MobileData:
+                            Toast.makeText(getApplicationContext(),"mobile on", Toast.LENGTH_SHORT).show();                            break;
+
+                    }
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Connection turned OFF", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
 
 
 
@@ -328,5 +361,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
 
 }
