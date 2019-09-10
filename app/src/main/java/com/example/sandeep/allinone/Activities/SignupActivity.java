@@ -61,6 +61,7 @@ public class SignupActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Successful created,Now Login..", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(i);
+                                        finish();
                                     } else {
                                         dialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();

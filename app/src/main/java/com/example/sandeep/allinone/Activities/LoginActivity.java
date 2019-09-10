@@ -92,6 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(i);
+                                        finish();
                                     } else {
                                         dialog.dismiss();
                                         if (!isNetworkAvailable()){
