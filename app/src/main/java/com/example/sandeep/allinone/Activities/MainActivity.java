@@ -1,10 +1,13 @@
 package com.example.sandeep.allinone.Activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
@@ -69,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
     private long mTimeLeftInMillis;
     private long mEndTime;
 
-
     boolean doubleBackToExitPressedOnce = false;
+
+
+    AlertDialog.Builder  alertBuilder;
+
+    ProgressDialog progressDialog;
 
 
     Toolbar toolbar;
@@ -90,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar =  findViewById(R.id.toolbar);
         drawerLayout=findViewById(R.id.drawerlayout);
         setSupportActionBar(toolbar);
+
+        alertBuilder = new AlertDialog.Builder(this);
+
+        progressDialog = new ProgressDialog(this);
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
 
 
@@ -211,11 +223,49 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.Logout_id:
-                        auth.signOut();
-                        new SharedPrefence(getApplicationContext()).logout();
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(i);
-                        finish();
+
+                        drawerLayout.closeDrawers();
+
+
+                        alertBuilder.setMessage("Are you sure you want to logout?").setTitle("Alert")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+
+                                        progressDialog.show();
+                                        progressDialog.setMessage("Logging Out");
+                                        progressDialog.setCancelable(false);
+                                        auth.signOut();
+                                        new SharedPrefence(getApplicationContext()).logout();
+                                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                                        progressDialog.dismiss();
+                                        startActivity(i);
+                                        finish();
+
+                                    }
+                                })
+
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+
+                                    }
+                                });
+
+
+
+                        AlertDialog alert = alertBuilder.create();
+                        alert.show();
+
+
+
+
+
+
                         break;
 
 
