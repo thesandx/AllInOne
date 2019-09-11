@@ -36,6 +36,7 @@ import com.example.sandeep.allinone.fragments.Home;
 import com.example.sandeep.allinone.fragments.Instagram;
 import com.example.sandeep.allinone.fragments.Timer;
 import com.example.sandeep.allinone.fragments.Twitter;
+import com.example.sandeep.allinone.fragments.WebviewUrl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -163,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.fb_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Facebook());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://m.facebook.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
@@ -174,7 +175,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.tweeter_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Twitter());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.twitter.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
@@ -183,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.insta_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Instagram());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.instagram.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Instagram");
                         menuItem.setChecked(true);

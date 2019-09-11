@@ -1,11 +1,9 @@
 package com.example.sandeep.allinone.fragments;
 
-
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,21 +12,20 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
+import androidx.fragment.app.Fragment;
+
 import com.example.sandeep.allinone.Activities.MainActivity;
 import com.example.sandeep.allinone.R;
 
+public class WebviewUrl extends Fragment {
 
-/**
- * A simple {@link Fragment} subclass.
- */
-public class Facebook extends Fragment {
+
 
     String url;
     Context context;
 
 
-    public Facebook(Context context,String url) {
-        // Required empty public constructor
+    public WebviewUrl(Context context,String url) {
         this.context =context;
         this.url = url;
     }
@@ -36,18 +33,15 @@ public class Facebook extends Fragment {
 
     ProgressDialog pd;
 
-    public long startTime,endTime;
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        startTime=System.currentTimeMillis();
 
-        View view=inflater.inflate(R.layout.fragment_facebook,container,false);
+
+        View view=inflater.inflate(R.layout.webview_url,container,false);
         // Inflate the layout for this fragment
-        mWebView=(WebView) view.findViewById(R.id.FbwebView);
+        mWebView=(WebView) view.findViewById(R.id.masterwebView);
         mWebView.loadUrl(url);
 
         pd = new ProgressDialog(getActivity());
@@ -57,21 +51,21 @@ public class Facebook extends Fragment {
         webSettings.setJavaScriptEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
-       mWebView.setWebViewClient(new WebViewClient(){
+        mWebView.setWebViewClient(new WebViewClient(){
 
-           @Override
-           public void onPageStarted(WebView view, String url, Bitmap favicon) {
-               super.onPageStarted(view, url, favicon);
-               pd.show();
-               pd.setMessage("Loading page");
-           }
+            @Override
+            public void onPageStarted(WebView view, String url, Bitmap favicon) {
+                super.onPageStarted(view, url, favicon);
+                pd.show();
+                pd.setMessage("Loading page");
+            }
 
-           @Override
-           public void onPageFinished(WebView view, String url) {
-               super.onPageFinished(view, url);
-               pd.dismiss();
-           }
-       });
+            @Override
+            public void onPageFinished(WebView view, String url) {
+                super.onPageFinished(view, url);
+                pd.dismiss();
+            }
+        });
 
 
 
@@ -112,11 +106,8 @@ public class Facebook extends Fragment {
         return view;
     }
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        endTime=System.currentTimeMillis();
-        long timeSpent=endTime-startTime;
 
-    }
+
+
+
 }
