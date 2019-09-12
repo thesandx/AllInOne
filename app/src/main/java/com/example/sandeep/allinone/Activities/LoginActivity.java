@@ -2,6 +2,7 @@ package com.example.sandeep.allinone.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -14,10 +15,13 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
+import com.example.sandeep.allinone.fragments.ForgotPassword;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -30,7 +34,12 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     Button  loginButton;
     Button signUpButton;
+    TextView forgotPassword;
     private CheckBox rememberMe;
+
+    static FrameLayout frameLayout;
+
+    FragmentTransaction fragmentTransaction;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
@@ -47,6 +56,11 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_login);
         rememberMe = findViewById(R.id.remember_me);
         signUpButton = findViewById(R.id.btn_signupnew);
+        forgotPassword  = findViewById(R.id.forgot_pass_tv);
+
+        frameLayout = findViewById(R.id.container_login);
+
+
 
         dialog = new ProgressDialog(this);
 
@@ -68,6 +82,26 @@ public class LoginActivity extends AppCompatActivity {
 
             }
         });
+
+
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //open the fragment
+
+                frameLayout.setVisibility(View.VISIBLE);
+
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.add(R.id.container_login,new ForgotPassword());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
 
 
         loginButton.setOnClickListener(new View.OnClickListener() {
@@ -109,6 +143,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            frameLayout.setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStack();
+        }
 
     }
 

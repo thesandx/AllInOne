@@ -268,8 +268,6 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
 
-
-
                 }
                 return false;
             }
