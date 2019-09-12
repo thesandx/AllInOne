@@ -1,10 +1,13 @@
 package com.example.sandeep.allinone.Activities;
 
+import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
 import android.os.Handler;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import android.os.Bundle;
@@ -21,8 +24,13 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleRegistry;
+import androidx.lifecycle.LifecycleRegistryOwner;
+import androidx.lifecycle.Observer;
 
 
+import com.example.sandeep.allinone.ConnectionLiveData;
+import com.example.sandeep.allinone.Models.ConnectionModel;
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
 import com.example.sandeep.allinone.fragments.About;
@@ -31,6 +39,7 @@ import com.example.sandeep.allinone.fragments.Home;
 import com.example.sandeep.allinone.fragments.Instagram;
 import com.example.sandeep.allinone.fragments.Timer;
 import com.example.sandeep.allinone.fragments.Twitter;
+import com.example.sandeep.allinone.fragments.WebviewUrl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -63,8 +72,12 @@ public class MainActivity extends AppCompatActivity {
     private long mTimeLeftInMillis;
     private long mEndTime;
 
-
     boolean doubleBackToExitPressedOnce = false;
+
+
+    AlertDialog.Builder  alertBuilder;
+
+    ProgressDialog progressDialog;
 
 
     Toolbar toolbar;
@@ -74,6 +87,8 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     FirebaseAuth auth;
 
+    public static final int MobileData = 2;
+    public static final int WifiData = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +97,11 @@ public class MainActivity extends AppCompatActivity {
         toolbar =  findViewById(R.id.toolbar);
         drawerLayout=findViewById(R.id.drawerlayout);
         setSupportActionBar(toolbar);
+
+        alertBuilder = new AlertDialog.Builder(this);
+
+        progressDialog = new ProgressDialog(this);
+
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
 
 
@@ -112,6 +132,32 @@ public class MainActivity extends AppCompatActivity {
 **/
 
 
+        ConnectionLiveData connectionLiveData = new ConnectionLiveData(getApplicationContext());
+
+        connectionLiveData.observe(this, new Observer<ConnectionModel>() {
+            @Override
+            public void onChanged(ConnectionModel connection) {
+                if (connection.getIsConnected()){
+
+                    switch (connection.getType()){
+
+                        case WifiData:
+                            Toast.makeText(getApplicationContext(),"wifi on", Toast.LENGTH_SHORT).show();                            break;
+                        case MobileData:
+                            Toast.makeText(getApplicationContext(),"mobile on", Toast.LENGTH_SHORT).show();                            break;
+
+                    }
+
+                }
+                else {
+                    Toast.makeText(getApplicationContext(),"Connection turned OFF", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
+
+
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -130,7 +176,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.fb_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Facebook());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://m.facebook.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
@@ -141,7 +187,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.tweeter_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Twitter());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.twitter.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
@@ -150,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.insta_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Instagram());
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.instagram.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Instagram");
                         menuItem.setChecked(true);
@@ -177,14 +223,50 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.Logout_id:
-                        auth.signOut();
-                        new SharedPrefence(getApplicationContext()).logout();
-                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                        startActivity(i);
-                        finish();
+
+                        drawerLayout.closeDrawers();
+
+
+                        alertBuilder.setMessage("Are you sure you want to logout?").setTitle("Alert")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+
+                                        progressDialog.show();
+                                        progressDialog.setMessage("Logging Out");
+                                        progressDialog.setCancelable(false);
+                                        auth.signOut();
+                                        new SharedPrefence(getApplicationContext()).logout();
+                                        Intent i = new Intent(getApplicationContext(),LoginActivity.class);
+                                        progressDialog.dismiss();
+                                        startActivity(i);
+                                        finish();
+
+                                    }
+                                })
+
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+
+                                        dialog.cancel();
+
+                                    }
+                                });
+
+
+
+                        AlertDialog alert = alertBuilder.create();
+                        alert.show();
+
+
+
+
+
+
                         break;
-
-
 
                 }
                 return false;
@@ -328,5 +410,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }, 2000);
     }
+
 
 }

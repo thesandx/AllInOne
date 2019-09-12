@@ -2,18 +2,26 @@ package com.example.sandeep.allinone.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
+import com.example.sandeep.allinone.fragments.ForgotPassword;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -26,10 +34,17 @@ public class LoginActivity extends AppCompatActivity {
     EditText password;
     Button  loginButton;
     Button signUpButton;
+    TextView forgotPassword;
     private CheckBox rememberMe;
+
+    static FrameLayout frameLayout;
+
+    FragmentTransaction fragmentTransaction;
 
     FirebaseAuth firebaseAuth;
     FirebaseUser firebaseUser;
+
+    ProgressDialog dialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +56,13 @@ public class LoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_login);
         rememberMe = findViewById(R.id.remember_me);
         signUpButton = findViewById(R.id.btn_signupnew);
+        forgotPassword  = findViewById(R.id.forgot_pass_tv);
+
+        frameLayout = findViewById(R.id.container_login);
+
+
+
+        dialog = new ProgressDialog(this);
 
 
         firebaseAuth = FirebaseAuth.getInstance();
@@ -62,10 +84,32 @@ public class LoginActivity extends AppCompatActivity {
         });
 
 
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //open the fragment
+
+                frameLayout.setVisibility(View.VISIBLE);
+
+                fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                fragmentTransaction.add(R.id.container_login,new ForgotPassword());
+                fragmentTransaction.addToBackStack(null);
+                fragmentTransaction.commit();
+
+
+            }
+        });
+
+
+
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()) {
+                    dialog.show();
+                    dialog.setMessage("Logging In...");
                     loginButton.setEnabled(false);
                     final String email1 = email.getText().toString();
                     final String password1 = password.getText().toString();
@@ -78,11 +122,19 @@ public class LoginActivity extends AppCompatActivity {
                                         if (rememberMe.isChecked()) {
                                             saveLoginDetails(email1, password1, true);
                                         }
+                                        dialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Successful login", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
                                         startActivity(i);
+                                        finish();
                                     } else {
-                                        Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                        dialog.dismiss();
+                                        if (!isNetworkAvailable()){
+                                            Toast.makeText(getApplicationContext(), "Connect to Internet", Toast.LENGTH_SHORT).show();
+                                        }
+                                        else {
+                                            Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
+                                        }
                                         loginButton.setEnabled(true);
                                     }
 
@@ -91,6 +143,23 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+
+    }
+
+
+
+    @Override
+    public void onBackPressed() {
+
+        int count = getSupportFragmentManager().getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+            //additional code
+        } else {
+            frameLayout.setVisibility(View.GONE);
+            getSupportFragmentManager().popBackStack();
+        }
 
     }
 
@@ -116,6 +185,31 @@ public class LoginActivity extends AppCompatActivity {
         Log.d("Thesandx", "inside isloggedin");
 
         return new SharedPrefence(this).isLoggedIn();
+    }
+
+    private boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
+
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 
 

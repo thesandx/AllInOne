@@ -3,6 +3,7 @@ package com.example.sandeep.allinone.Activities;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -22,6 +23,9 @@ public class SignupActivity extends AppCompatActivity {
     EditText password1;
     Button signupButton;
 
+    //this is default android dialog box
+    ProgressDialog dialog;
+
     FirebaseAuth firebaseAuth;
 
     @Override
@@ -33,12 +37,16 @@ public class SignupActivity extends AppCompatActivity {
         password1 = findViewById(R.id.input_password1);
         signupButton= findViewById(R.id.btn_signup);
 
+        dialog = new ProgressDialog(this);
+
         firebaseAuth = FirebaseAuth.getInstance();
 
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (validate()) {
+                    dialog.show();
+                    dialog.setMessage("Signin up...");
                     signupButton.setEnabled(false);
                     String email = email1.getText().toString();
                     String password = password1.getText().toString();
@@ -49,10 +57,13 @@ public class SignupActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<AuthResult> task) {
 
                                     if (task.isSuccessful()) {
+                                        dialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Successful created,Now Login..", Toast.LENGTH_SHORT).show();
                                         Intent i = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(i);
+                                        finish();
                                     } else {
+                                        dialog.dismiss();
                                         Toast.makeText(getApplicationContext(), "Error", Toast.LENGTH_SHORT).show();
                                         signupButton.setEnabled(true);
                                     }
