@@ -110,6 +110,7 @@ public class LoginActivity extends AppCompatActivity {
                 if (validate()) {
                     dialog.show();
                     dialog.setMessage("Logging In...");
+                    dialog.setCancelable(false);
                     loginButton.setEnabled(false);
                     final String email1 = email.getText().toString();
                     final String password1 = password.getText().toString();
