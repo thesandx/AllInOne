@@ -103,7 +103,7 @@ public class MainActivity extends AppCompatActivity {
         progressDialog = new ProgressDialog(this);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
-
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container, new Home());
@@ -116,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+
 
 
     /**    SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -224,7 +224,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.Logout_id:
 
-                        drawerLayout.closeDrawers();
+                                  drawerLayout.closeDrawers();
 
 
                         alertBuilder.setMessage("Are you sure you want to logout?").setTitle("Alert")
