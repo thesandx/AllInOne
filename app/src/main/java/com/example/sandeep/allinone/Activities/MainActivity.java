@@ -164,12 +164,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
 
+
                     case R.id.home_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new Home());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Home");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
@@ -180,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
@@ -191,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
                         break;
 
@@ -199,6 +203,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.instagram.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Instagram");
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
@@ -209,6 +214,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Website");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
                         break;
 
@@ -218,6 +224,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("About");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
@@ -402,6 +409,7 @@ public class MainActivity extends AppCompatActivity {
        // pauseTimer();
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
+        //i.e after 2 second the code inside this will be executed.
         new Handler().postDelayed(new Runnable() {
 
             @Override

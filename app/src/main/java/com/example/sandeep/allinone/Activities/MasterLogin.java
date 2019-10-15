@@ -35,7 +35,6 @@ public class MasterLogin extends AppCompatActivity {
         signupBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Intent intent=new Intent(MasterLogin.this,SignupActivity.class);
                 startActivity(intent);
 

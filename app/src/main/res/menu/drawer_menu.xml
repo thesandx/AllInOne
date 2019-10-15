@@ -8,7 +8,8 @@
 
 
     </group>
-    <group android:checkableBehavior="single">
+    <group
+        android:checkableBehavior="single">
         <item android:id="@+id/fb_id"
               android:title="Facebook"
             android:icon="@drawable/fbicon"
