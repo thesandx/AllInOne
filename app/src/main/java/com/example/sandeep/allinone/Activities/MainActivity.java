@@ -31,8 +31,10 @@ import androidx.lifecycle.Observer;
 
 import com.example.sandeep.allinone.ConnectionLiveData;
 import com.example.sandeep.allinone.Models.ConnectionModel;
+import com.example.sandeep.allinone.Models.HistoryModel;
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
+import com.example.sandeep.allinone.Utils.DateUtils;
 import com.example.sandeep.allinone.fragments.About;
 import com.example.sandeep.allinone.fragments.Facebook;
 import com.example.sandeep.allinone.fragments.Home;
@@ -42,8 +44,11 @@ import com.example.sandeep.allinone.fragments.Twitter;
 import com.example.sandeep.allinone.fragments.WebviewUrl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -87,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     FirebaseAuth auth;
 
+    private DatabaseReference database;
+
+
     public static final int MobileData = 2;
     public static final int WifiData = 1;
 
@@ -97,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
         toolbar =  findViewById(R.id.toolbar);
         drawerLayout=findViewById(R.id.drawerlayout);
         setSupportActionBar(toolbar);
+
+        database = FirebaseDatabase.getInstance().getReference();
 
         alertBuilder = new AlertDialog.Builder(this);
 
@@ -116,6 +126,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
 
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
 
 
 
@@ -307,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 setTime(millisInput);
+                saveHistory(input);
                 //millisinput
                 mEditTextInput.setText("");
                 startTimer();
@@ -315,6 +328,24 @@ public class MainActivity extends AppCompatActivity {
                // mButtonReset.setEnabled(false);
             }
         });
+
+    }
+
+    private void saveHistory(String timeLimit){
+        //create a child in root
+        //assign value to the child
+        DatabaseReference historyDb = database.child("history");
+        DatabaseReference userDb = historyDb.child("sandeep").push();
+
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+
+        String dateStr = DateUtils.DateToString(date,"dd/MM/yyyy");
+        String timeStr = DateUtils.DateToString(date,"HH:mm");
+
+        HistoryModel historyModel = new HistoryModel(dateStr,timeStr,timeLimit);
+
+        userDb.setValue(historyModel);
 
     }
 
