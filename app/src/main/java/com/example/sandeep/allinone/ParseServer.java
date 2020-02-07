@@ -2,18 +2,13 @@ package com.example.sandeep.allinone;
 
 import android.app.Application;
 
-import com.parse.Parse;
-import com.parse.ParseACL;
-import com.parse.ParseObject;
-import com.parse.ParseUser;
-
 public class ParseServer extends Application {
 
     @Override
     public void onCreate() {
         super.onCreate();
 
-        // Enable Local Datastore.
+       /* // Enable Local Datastore.
         Parse.enableLocalDatastore(this);
 
         Parse.initialize(new Parse.Configuration.Builder(this)
@@ -29,7 +24,7 @@ public class ParseServer extends Application {
         ParseACL.setDefaultACL(defaultACL, true);
 
         ParseUser.enableAutomaticUser();
-
+*/
 
        /* ParseObject score = new ParseObject("Score");
         score.put("PlayerName","thesandx");

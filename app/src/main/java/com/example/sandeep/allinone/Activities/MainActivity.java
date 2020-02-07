@@ -31,8 +31,10 @@ import androidx.lifecycle.Observer;
 
 import com.example.sandeep.allinone.ConnectionLiveData;
 import com.example.sandeep.allinone.Models.ConnectionModel;
+import com.example.sandeep.allinone.Models.HistoryModel;
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
+import com.example.sandeep.allinone.Utils.DateUtils;
 import com.example.sandeep.allinone.fragments.About;
 import com.example.sandeep.allinone.fragments.Facebook;
 import com.example.sandeep.allinone.fragments.Home;
@@ -42,8 +44,11 @@ import com.example.sandeep.allinone.fragments.Twitter;
 import com.example.sandeep.allinone.fragments.WebviewUrl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -87,6 +92,9 @@ public class MainActivity extends AppCompatActivity {
     ActionBarDrawerToggle actionBarDrawerToggle;
     FirebaseAuth auth;
 
+    private DatabaseReference database;
+
+
     public static final int MobileData = 2;
     public static final int WifiData = 1;
 
@@ -98,12 +106,14 @@ public class MainActivity extends AppCompatActivity {
         drawerLayout=findViewById(R.id.drawerlayout);
         setSupportActionBar(toolbar);
 
+        database = FirebaseDatabase.getInstance().getReference();
+
         alertBuilder = new AlertDialog.Builder(this);
 
         progressDialog = new ProgressDialog(this);
 
         actionBarDrawerToggle = new ActionBarDrawerToggle(this,drawerLayout,toolbar,R.string.drawer_open,R.string.drawer_close);
-
+        drawerLayout.setDrawerListener(actionBarDrawerToggle);
 
         fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.add(R.id.main_container, new Home());
@@ -116,7 +126,9 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(MainActivity.this,"Please set the time for this session",Toast.LENGTH_SHORT).show();
 
-        drawerLayout.setDrawerListener(actionBarDrawerToggle);
+        drawerLayout.addDrawerListener(actionBarDrawerToggle);
+        actionBarDrawerToggle.syncState();
+
 
 
     /**    SharedPreferences prefs = this.getSharedPreferences("prefs", MODE_PRIVATE);
@@ -164,12 +176,14 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
 
+
                     case R.id.home_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new Home());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Home");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
@@ -180,6 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
@@ -191,6 +206,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
                         break;
 
@@ -199,6 +215,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.instagram.com/"));
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Instagram");
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
@@ -209,6 +226,7 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Website");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
                         break;
 
@@ -218,13 +236,14 @@ public class MainActivity extends AppCompatActivity {
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("About");
                         menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
                         drawerLayout.closeDrawers();
 
                         break;
 
                     case R.id.Logout_id:
 
-                        drawerLayout.closeDrawers();
+                                  drawerLayout.closeDrawers();
 
 
                         alertBuilder.setMessage("Are you sure you want to logout?").setTitle("Alert")
@@ -300,6 +319,7 @@ public class MainActivity extends AppCompatActivity {
                 }
 
                 setTime(millisInput);
+                saveHistory(input);
                 //millisinput
                 mEditTextInput.setText("");
                 startTimer();
@@ -308,6 +328,24 @@ public class MainActivity extends AppCompatActivity {
                // mButtonReset.setEnabled(false);
             }
         });
+
+    }
+
+    private void saveHistory(String timeLimit){
+        //create a child in root
+        //assign value to the child
+        DatabaseReference historyDb = database.child("history");
+        DatabaseReference userDb = historyDb.child("sandeep").push();
+
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+
+        String dateStr = DateUtils.DateToString(date,"dd/MM/yyyy");
+        String timeStr = DateUtils.DateToString(date,"HH:mm");
+
+        HistoryModel historyModel = new HistoryModel(dateStr,timeStr,timeLimit);
+
+        userDb.setValue(historyModel);
 
     }
 
@@ -402,6 +440,7 @@ public class MainActivity extends AppCompatActivity {
        // pauseTimer();
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
+        //i.e after 2 second the code inside this will be executed.
         new Handler().postDelayed(new Runnable() {
 
             @Override
