@@ -29,6 +29,11 @@
             android:icon="@drawable/twittericon">
         </item>
 
+        <item android:id="@+id/history_id"
+            android:title="History"
+            android:icon="@drawable/ic_timer">
+        </item>
+
         <item android:id="@+id/timer_id"
             android:title="Any Other Site"
             android:icon="@drawable/webicon">

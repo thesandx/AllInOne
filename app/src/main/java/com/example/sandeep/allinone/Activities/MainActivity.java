@@ -37,6 +37,7 @@ import com.example.sandeep.allinone.SharedPrefence;
 import com.example.sandeep.allinone.Utils.DateUtils;
 import com.example.sandeep.allinone.fragments.About;
 import com.example.sandeep.allinone.fragments.Facebook;
+import com.example.sandeep.allinone.fragments.HistoryFragment;
 import com.example.sandeep.allinone.fragments.Home;
 import com.example.sandeep.allinone.fragments.Instagram;
 import com.example.sandeep.allinone.fragments.Timer;
@@ -240,6 +241,19 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
 
                         break;
+
+
+                    case R.id.history_id:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main_container, new HistoryFragment());
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("History");
+                        menuItem.setChecked(true);
+                        navigationView.setCheckedItem(menuItem.getItemId());
+                        drawerLayout.closeDrawers();
+
+                        break;
+
 
                     case R.id.Logout_id:
 

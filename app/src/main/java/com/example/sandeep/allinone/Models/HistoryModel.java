@@ -7,6 +7,12 @@ public class HistoryModel {
     private String timeLimit;
 
 
+
+    public HistoryModel() {
+
+    }
+
+
     public HistoryModel(String date, String time, String timeLimit) {
         Date = date;
         this.time = time;
