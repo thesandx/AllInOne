@@ -24,8 +24,6 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
-import androidx.lifecycle.LifecycleRegistry;
-import androidx.lifecycle.LifecycleRegistryOwner;
 import androidx.lifecycle.Observer;
 
 
@@ -35,13 +33,9 @@ import com.example.sandeep.allinone.Models.HistoryModel;
 import com.example.sandeep.allinone.R;
 import com.example.sandeep.allinone.SharedPrefence;
 import com.example.sandeep.allinone.Utils.DateUtils;
-import com.example.sandeep.allinone.fragments.About;
-import com.example.sandeep.allinone.fragments.Facebook;
 import com.example.sandeep.allinone.fragments.HistoryFragment;
 import com.example.sandeep.allinone.fragments.Home;
-import com.example.sandeep.allinone.fragments.Instagram;
 import com.example.sandeep.allinone.fragments.Timer;
-import com.example.sandeep.allinone.fragments.Twitter;
 import com.example.sandeep.allinone.fragments.WebviewUrl;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -221,6 +215,16 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
+                    case R.id.linkedin_id:
+                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this,"https://www.linkedin.com/"));
+                        fragmentTransaction.commit();
+                        getSupportActionBar().setTitle("LinkedIn");
+                        navigationView.setCheckedItem(menuItem.getItemId());
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        break;
+
                     case R.id.timer_id:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new Timer());
@@ -231,16 +235,6 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.About_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new About());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("About");
-                        menuItem.setChecked(true);
-                        navigationView.setCheckedItem(menuItem.getItemId());
-                        drawerLayout.closeDrawers();
-
-                        break;
 
 
                     case R.id.history_id:
@@ -390,8 +384,11 @@ public class MainActivity extends AppCompatActivity {
                 mTimerRunning = false;
                 updateWatchInterface();
                 Toast.makeText(MainActivity.this, "Time is Up!!!", Toast.LENGTH_SHORT).show();
+                finish();
             }
         }.start();
+
+
 
         mTimerRunning = true;
         updateWatchInterface();
@@ -440,6 +437,15 @@ public class MainActivity extends AppCompatActivity {
         super.onPostCreate(savedInstanceState);
         actionBarDrawerToggle.syncState();
 
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (mCountDownTimer!=null) {
+            mCountDownTimer.cancel();
+        }
 
     }
 

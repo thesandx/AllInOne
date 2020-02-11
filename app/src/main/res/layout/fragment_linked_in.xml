@@ -3,11 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.Instagram">
+    tools:context=".fragments.Twitter">
 
     <!-- TODO: Update blank fragment layout -->
     <WebView
-        android:id="@+id/InstawebView"
+        android:id="@+id/linkedinwebView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

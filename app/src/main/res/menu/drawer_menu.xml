@@ -29,6 +29,11 @@
             android:icon="@drawable/twittericon">
         </item>
 
+        <item android:id="@+id/linkedin_id"
+            android:title="LinkedIn"
+            android:icon="@drawable/linkedin">
+        </item>
+
         <item android:id="@+id/history_id"
             android:title="History"
             android:icon="@drawable/ic_timer">
@@ -42,10 +47,7 @@
     </group>
 
     <group android:checkableBehavior="single">
-        <item android:id="@+id/About_id"
-            android:title="About"
-            android:icon="@drawable/about">
-        </item>
+
 
         <item android:id="@+id/Logout_id"
             android:title="LogOut"

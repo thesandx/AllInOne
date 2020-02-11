@@ -45,7 +45,7 @@ public void onBindViewHolder(@NonNull MyViewHolder holder,int position){
 
         holder.time.setText(historyModels.get(position).getTime());
         holder.date.setText(historyModels.get(position).getDate());
-        holder.timer.setText(historyModels.get(position).getTimeLimit());
+        holder.timer.setText(historyModels.get(position).getTimeLimit()+" min");
     }
 
 
