@@ -5,15 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
+    android:background="@color/colorPrimary"
     tools:context=".Activities.SplashActivity">
 
-    <TextView
-        android:id="@+id/welcome_text"
+
+    <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="50dp"
-        android:text="AllInOne"
-        android:textStyle="bold"
-        android:textColor="@color/colorPrimary"/>
+        android:src="@drawable/logo1"
+        />
+
 
 </RelativeLayout>

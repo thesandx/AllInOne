@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
+
     >
     <group android:checkableBehavior="single">
         <item android:id="@+id/home_id"
@@ -15,7 +15,7 @@
         android:checkableBehavior="single">
         <item android:id="@+id/fb_id"
               android:title="Facebook"
-            android:icon="@drawable/fbicon"
+            android:icon="@drawable/ic_facebook"
             >
         </item>
 
@@ -31,27 +31,9 @@
 
         <item android:id="@+id/linkedin_id"
             android:title="LinkedIn"
-            android:icon="@drawable/linkedin">
-        </item>
-
-        <item android:id="@+id/history_id"
-            android:title="History"
-            android:icon="@drawable/ic_timer">
-        </item>
-
-        <item android:id="@+id/timer_id"
-            android:title="Any Other Site"
-            android:icon="@drawable/webicon">
+            android:icon="@drawable/ic_linkedin">
         </item>
 
     </group>
 
-    <group android:checkableBehavior="single">
-
-
-        <item android:id="@+id/Logout_id"
-            android:title="LogOut"
-            android:icon="@drawable/about">
-        </item>
-    </group>
 </menu>
