@@ -2,16 +2,18 @@ package com.thesandx.sandeep.allinone.fragments;
 
 
 import android.os.Bundle;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+
 import com.thesandx.sandeep.allinone.Activities.MainActivity;
 import com.thesandx.sandeep.allinone.R;
 import com.thesandx.sandeep.allinone.databinding.FragmentHomeBinding;
+
+import java.util.HashMap;
 
 
 /**
@@ -27,19 +29,28 @@ public class Home extends Fragment {
         // Required empty public constructor
     }
 
+    public static String urlString = null;
+    HashMap<String, String> urlMap = new HashMap<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = FragmentHomeBinding.inflate(inflater,container,false);
+        urlMap.put("facebook", "https://www.facebook.com/");
+        urlMap.put("insta", "https://www.instagram.com/");
+        urlMap.put("twitter", "https://www.twitter.com/");
+        urlMap.put("linkedin", "https://www.linkedin.com/");
+        urlMap.put("tiktok", "https://www.tiktok.com/trending/?lang=en");
+        urlMap.put("youtube", "https://m.youtube.com/");
 
         ((MainActivity)getActivity()).getSupportActionBar();
 
         binding.fbBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFragment("https://www.facebook.com/");
+                urlString = urlMap.get("facebook");
+                openFragment(urlString);
                 ((MainActivity)getActivity()).getSupportActionBar().setTitle("Facebook");
 
             }
@@ -48,7 +59,8 @@ public class Home extends Fragment {
         binding.instaBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFragment("https://www.instagram.com/");
+                urlString = urlMap.get("insta");
+                openFragment(urlString);
                 ((MainActivity)getActivity()).getSupportActionBar().setTitle("Instagram");
             }
         });
@@ -56,7 +68,8 @@ public class Home extends Fragment {
         binding.twitterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFragment("https://www.twitter.com/");
+                urlString = urlMap.get("twitter");
+                openFragment(urlString);
                 ((MainActivity)getActivity()).getSupportActionBar().setTitle("Twitter");
             }
         });
@@ -64,8 +77,25 @@ public class Home extends Fragment {
         binding.linkedinBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openFragment("https://www.linkedin.com/");
+                urlString = urlMap.get("linkedin");
+                openFragment(urlString);
                 ((MainActivity)getActivity()).getSupportActionBar().setTitle("LinkedIn");
+            }
+        });
+        binding.tikTok.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                urlString = urlMap.get("tiktok");
+                openFragment(urlString);
+                ((MainActivity) getActivity()).getSupportActionBar().setTitle("TikTok");
+            }
+        });
+        binding.youtube.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                urlString = urlMap.get("youtube");
+                openFragment(urlString);
+                ((MainActivity) getActivity()).getSupportActionBar().setTitle("Youtube");
             }
         });
 
@@ -77,7 +107,11 @@ public class Home extends Fragment {
 
     public void openFragment(String url) {
         fragmentTransaction = requireFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(getContext(), url));
+        WebviewUrl webviewUrl = new WebviewUrl();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        webviewUrl.setArguments(args);
+        fragmentTransaction.replace(R.id.main_container, webviewUrl);
         fragmentTransaction.commit();
 
 

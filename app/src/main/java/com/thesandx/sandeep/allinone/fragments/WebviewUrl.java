@@ -1,7 +1,6 @@
 package com.thesandx.sandeep.allinone.fragments;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -22,16 +21,13 @@ public class WebviewUrl extends Fragment {
 
 
     String url;
-    Context context;
-
-
-    public WebviewUrl(Context context,String url) {
-        this.context =context;
-        this.url = url;
-    }
     WebView mWebView;
 
     ProgressDialog pd;
+
+    public WebviewUrl() {
+
+    }
 
 
     @Override
@@ -40,7 +36,9 @@ public class WebviewUrl extends Fragment {
 
 
         View view=inflater.inflate(R.layout.webview_url,container,false);
+        Bundle bundle = this.getArguments();
         // Inflate the layout for this fragment
+        url = bundle.getString("url");
         mWebView=(WebView) view.findViewById(R.id.masterwebView);
         mWebView.loadUrl(url);
 
@@ -49,6 +47,7 @@ public class WebviewUrl extends Fragment {
         // Enable Javascript
         WebSettings webSettings = mWebView.getSettings();
         webSettings.setJavaScriptEnabled(true);
+        webSettings.setDomStorageEnabled(true);
 
         // Force links and redirects to open in the WebView instead of in a browser
         mWebView.setWebViewClient(new WebViewClient(){
@@ -66,13 +65,6 @@ public class WebviewUrl extends Fragment {
                 pd.dismiss();
             }
         });
-
-
-
-
-
-
-
 
 
 

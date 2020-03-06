@@ -6,4 +6,7 @@
     <string name="About">This is the final year project Application </string>
     <string name="drawer_open">Open Drawer</string>
     <string name="drawer_close">Close Drawer</string>
+    <string name="share">Share</string>
+    <string name="tiktok">TikTok</string>
+    <string name="youtube">YouTube</string>
 </resources>

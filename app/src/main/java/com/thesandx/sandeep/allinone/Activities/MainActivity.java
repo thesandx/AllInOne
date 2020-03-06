@@ -1,30 +1,29 @@
 package com.thesandx.sandeep.allinone.Activities;
 
 import android.app.ProgressDialog;
-import android.os.Handler;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.drawerlayout.widget.DrawerLayout;
-
+import android.content.Intent;
 import android.os.Bundle;
-
+import android.os.Handler;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.Observer;
 
-
+import com.google.android.material.navigation.NavigationView;
+import com.thesandx.sandeep.allinone.BuildConfig;
 import com.thesandx.sandeep.allinone.ConnectionLiveData;
 import com.thesandx.sandeep.allinone.Models.ConnectionModel;
 import com.thesandx.sandeep.allinone.R;
 import com.thesandx.sandeep.allinone.fragments.Home;
 import com.thesandx.sandeep.allinone.fragments.WebviewUrl;
-import com.google.android.material.navigation.NavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -73,6 +72,7 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.commit();
         getSupportActionBar().setTitle("Home");
         navigationView = findViewById(R.id.navigation_view);
+        navigationView.setItemIconTintList(null);
 
 
 
@@ -104,10 +104,10 @@ public class MainActivity extends AppCompatActivity {
                     switch (connection.getType()) {
 
                         case WifiData:
-                            Toast.makeText(getApplicationContext(), "wifi on", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getApplicationContext(), "wifi on", Toast.LENGTH_SHORT).show();
                             break;
                         case MobileData:
-                            Toast.makeText(getApplicationContext(), "mobile data on", Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getApplicationContext(), "mobile data on", Toast.LENGTH_SHORT).show();
                             break;
 
                     }
@@ -137,9 +137,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.fb_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this, "https://www.facebook.com/"));
-                        fragmentTransaction.commit();
+                        openFragment("https://www.facebook.com/");
                         getSupportActionBar().setTitle("Facebook");
                         menuItem.setChecked(true);
                         navigationView.setCheckedItem(menuItem.getItemId());
@@ -149,9 +147,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                     case R.id.tweeter_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this, "https://www.twitter.com/"));
-                        fragmentTransaction.commit();
+                        openFragment("https://www.twitter.com/");
                         getSupportActionBar().setTitle("Twitter");
                         menuItem.setChecked(true);
                         navigationView.setCheckedItem(menuItem.getItemId());
@@ -159,9 +155,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.insta_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this, "https://www.instagram.com/"));
-                        fragmentTransaction.commit();
+                        openFragment("https://www.instagram.com/");
                         getSupportActionBar().setTitle("Instagram");
                         navigationView.setCheckedItem(menuItem.getItemId());
                         menuItem.setChecked(true);
@@ -169,21 +163,62 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.linkedin_id:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new WebviewUrl(MainActivity.this, "https://www.linkedin.com/"));
-                        fragmentTransaction.commit();
+                        openFragment("https://www.linkedin.com/");
                         getSupportActionBar().setTitle("LinkedIn");
                         navigationView.setCheckedItem(menuItem.getItemId());
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
 
+                    case R.id.tik_tok_id:
+                        openFragment("https://www.tiktok.com/trending/?lang=en");
+                        getSupportActionBar().setTitle("TikTok");
+                        navigationView.setCheckedItem(menuItem.getItemId());
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        break;
+                    case R.id.youtube:
+                        openFragment("https://m.youtube.com/");
+                        getSupportActionBar().setTitle("Youtube");
+                        navigationView.setCheckedItem(menuItem.getItemId());
+                        menuItem.setChecked(true);
+                        drawerLayout.closeDrawers();
+                        break;
 
+
+                    case R.id.share:
+                        try {
+                            Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                            shareIntent.setType("text/plain");
+                            shareIntent.putExtra(Intent.EXTRA_SUBJECT, "AllinOne Social Media");
+                            String shareMessage = "\nTry this super fast App to use all social media apps .\nIt is only 1MB in size.\nClick on below link to download the app.\n";
+                            shareMessage = shareMessage + "https://play.google.com/store/apps/details?id=" + BuildConfig.APPLICATION_ID;
+                            shareIntent.putExtra(Intent.EXTRA_TEXT, shareMessage);
+                            startActivity(Intent.createChooser(shareIntent, "choose one"));
+                        } catch (Exception e) {
+                            //e.toString();
+                        }
+                        drawerLayout.closeDrawers();
+                        break;
 
                 }
+
+
                 return false;
             }
         });
+
+
+    }
+
+    public void openFragment(String url) {
+        fragmentTransaction = getSupportFragmentManager().beginTransaction();
+        WebviewUrl webviewUrl = new WebviewUrl();
+        Bundle args = new Bundle();
+        args.putString("url", url);
+        webviewUrl.setArguments(args);
+        fragmentTransaction.replace(R.id.main_container, webviewUrl);
+        fragmentTransaction.commit();
 
 
     }
