@@ -1,13 +1,12 @@
-package com.thesandx.sandeep.allinone.Activities;
+package com.thesandx.sandeep.tiktok.Activities;
 
 import android.content.Intent;
-import android.os.Handler;
-
 import android.os.Bundle;
+import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.thesandx.sandeep.allinone.R;
+import com.thesandx.sandeep.tiktok.R;
 
 public class SplashActivity extends AppCompatActivity {
 

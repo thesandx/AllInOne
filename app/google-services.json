@@ -1,34 +1,34 @@
 {
   "project_info": {
-    "project_number": "144855932970",
-    "firebase_url": "https://allinone-a2a2c.firebaseio.com",
-    "project_id": "allinone-a2a2c",
-    "storage_bucket": "allinone-a2a2c.appspot.com"
+    "project_number": "614898999545",
+    "firebase_url": "https://tiktok-a554a.firebaseio.com",
+    "project_id": "tiktok-a554a",
+    "storage_bucket": "tiktok-a554a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:144855932970:android:e2f4afb0048035ac0c2353",
+        "mobilesdk_app_id": "1:614898999545:android:b3bb806f250f4180b74228",
         "android_client_info": {
-          "package_name": "com.thesandx.sandeep.allinone"
+          "package_name": "com.thesandx.sandeep.tiktok"
         }
       },
       "oauth_client": [
         {
-          "client_id": "144855932970-48ue1tkj4d3qens84arnulcacfrinolg.apps.googleusercontent.com",
+          "client_id": "614898999545-vb1ic1v5nu4f3a5q611tsrn1k6kp7o81.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDs8D9m_lyppFLbPEJKIRP7wFakkmLr4Vo"
+          "current_key": "AIzaSyB2EUgpC3ECLZAVAEpJdsz6gNikCfgy2mg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "144855932970-48ue1tkj4d3qens84arnulcacfrinolg.apps.googleusercontent.com",
+              "client_id": "614898999545-vb1ic1v5nu4f3a5q611tsrn1k6kp7o81.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

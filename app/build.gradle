@@ -5,7 +5,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.thesandx.sandeep.allinone"
+        applicationId "com.thesandx.sandeep.tiktok"
         minSdkVersion 21
         targetSdkVersion 28
         versionCode 2

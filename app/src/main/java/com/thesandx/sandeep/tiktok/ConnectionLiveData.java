@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone;
+package com.thesandx.sandeep.tiktok;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -9,10 +9,10 @@ import android.net.NetworkInfo;
 
 import androidx.lifecycle.LiveData;
 
-import com.thesandx.sandeep.allinone.Models.ConnectionModel;
+import com.thesandx.sandeep.tiktok.Models.ConnectionModel;
 
-import static com.thesandx.sandeep.allinone.Activities.MainActivity.MobileData;
-import static com.thesandx.sandeep.allinone.Activities.MainActivity.WifiData;
+import static com.thesandx.sandeep.tiktok.Activities.MainActivity.MobileData;
+import static com.thesandx.sandeep.tiktok.Activities.MainActivity.WifiData;
 
 public class ConnectionLiveData extends LiveData<ConnectionModel> {
 

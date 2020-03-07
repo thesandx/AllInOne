@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone.fragments;
+package com.thesandx.sandeep.tiktok.fragments;
 
 import android.app.ProgressDialog;
 import android.graphics.Bitmap;
@@ -13,8 +13,8 @@ import android.webkit.WebViewClient;
 
 import androidx.fragment.app.Fragment;
 
-import com.thesandx.sandeep.allinone.Activities.MainActivity;
-import com.thesandx.sandeep.allinone.R;
+import com.thesandx.sandeep.tiktok.Activities.MainActivity;
+import com.thesandx.sandeep.tiktok.R;
 
 public class WebviewUrl extends Fragment {
 

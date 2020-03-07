@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone;
+package com.thesandx.sandeep.tiktok;
 
 import android.content.Context;
 import android.content.SharedPreferences;

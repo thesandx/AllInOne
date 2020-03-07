@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone.Models;
+package com.thesandx.sandeep.tiktok.Models;
 
 public class ConnectionModel {
 

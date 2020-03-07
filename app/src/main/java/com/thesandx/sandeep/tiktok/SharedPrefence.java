@@ -1,7 +1,7 @@
-package com.thesandx.sandeep.allinone;
+package com.thesandx.sandeep.tiktok;
 
-import android.content.SharedPreferences;
 import android.content.Context;
+import android.content.SharedPreferences;
 
 public class SharedPrefence {
 

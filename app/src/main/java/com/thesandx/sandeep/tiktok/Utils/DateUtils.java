@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone.Utils;
+package com.thesandx.sandeep.tiktok.Utils;
 
 import java.text.Format;
 import java.text.ParseException;

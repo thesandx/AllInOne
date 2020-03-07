@@ -1,9 +1,9 @@
-package com.thesandx.sandeep.allinone.Dialogs;
+package com.thesandx.sandeep.tiktok.Dialogs;
 
 import android.app.Dialog;
 import android.content.Context;
 
-import com.thesandx.sandeep.allinone.R;
+import com.thesandx.sandeep.tiktok.R;
 
 public class ProgressDialog {
     private Dialog dialog;

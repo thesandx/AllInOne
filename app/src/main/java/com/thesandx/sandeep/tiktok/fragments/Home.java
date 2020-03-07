@@ -1,4 +1,4 @@
-package com.thesandx.sandeep.allinone.fragments;
+package com.thesandx.sandeep.tiktok.fragments;
 
 
 import android.os.Bundle;
@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.thesandx.sandeep.allinone.Activities.MainActivity;
-import com.thesandx.sandeep.allinone.R;
-import com.thesandx.sandeep.allinone.databinding.FragmentHomeBinding;
+import com.thesandx.sandeep.tiktok.Activities.MainActivity;
+import com.thesandx.sandeep.tiktok.R;
+import com.thesandx.sandeep.tiktok.databinding.FragmentHomeBinding;
 
 import java.util.HashMap;
 
