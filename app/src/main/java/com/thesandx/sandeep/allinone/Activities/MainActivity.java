@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                         menuItem.setChecked(true);
                         drawerLayout.closeDrawers();
                         break;
-                    case R.id.youtube:
+                    case R.id.youtube_id:
                         openFragment("https://m.youtube.com/");
                         getSupportActionBar().setTitle("Youtube");
                         navigationView.setCheckedItem(menuItem.getItemId());
