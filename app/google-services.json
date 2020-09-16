@@ -1,50 +1,34 @@
 {
   "project_info": {
-    "project_number": "1081921075866",
-    "firebase_url": "https://allinone-thesandx.firebaseio.com",
-    "project_id": "allinone-thesandx",
-    "storage_bucket": "allinone-thesandx.appspot.com"
+    "project_number": "614898999545",
+    "firebase_url": "https://tiktok-a554a.firebaseio.com",
+    "project_id": "tiktok-a554a",
+    "storage_bucket": "tiktok-a554a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1081921075866:android:fafd309a863a9cda",
+        "mobilesdk_app_id": "1:614898999545:android:b3bb806f250f4180b74228",
         "android_client_info": {
-          "package_name": "com.example.sandeep.allinone"
+          "package_name": "com.thesandx.sandeep.tiktok"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1081921075866-llofda9daf3l009movi71l4kv2m6o5t4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.sandeep.allinone",
-            "certificate_hash": "b06053ffbbacab3039e964de75cd10994c939b57"
-          }
-        },
-        {
-          "client_id": "1081921075866-ieavire2og8ph16tirqshldguijaqpr8.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.sandeep.allinone",
-            "certificate_hash": "b39531c046013617e9da6b887628dc29f410f389"
-          }
-        },
-        {
-          "client_id": "1081921075866-lb9tvkjndmh6gvq9t6un26n5feggj5o8.apps.googleusercontent.com",
+          "client_id": "614898999545-vb1ic1v5nu4f3a5q611tsrn1k6kp7o81.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDk7xQWEdDEoECb0UoCnoF5--VaC7Ku_Cc"
+          "current_key": "AIzaSyB2EUgpC3ECLZAVAEpJdsz6gNikCfgy2mg"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1081921075866-lb9tvkjndmh6gvq9t6un26n5feggj5o8.apps.googleusercontent.com",
+              "client_id": "614898999545-vb1ic1v5nu4f3a5q611tsrn1k6kp7o81.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

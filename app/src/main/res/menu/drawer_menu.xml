@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:showIn="navigation_view"
+
     >
     <group android:checkableBehavior="single">
         <item android:id="@+id/home_id"
@@ -12,10 +11,11 @@
 
     </group>
     <group
+        android:id="@+id/websites"
         android:checkableBehavior="single">
         <item android:id="@+id/fb_id"
               android:title="Facebook"
-            android:icon="@drawable/fbicon"
+            android:icon="@drawable/ic_facebook"
             >
         </item>
 
@@ -25,26 +25,35 @@
         </item>
 
         <item android:id="@+id/tweeter_id"
-            android:title="twitter"
+            android:title="Twitter"
             android:icon="@drawable/twittericon">
         </item>
 
-        <item android:id="@+id/timer_id"
-            android:title="Any Other Site"
-            android:icon="@drawable/webicon">
+        <item android:id="@+id/linkedin_id"
+            android:title="LinkedIn"
+            android:icon="@drawable/ic_linkedin">
         </item>
+
+        <item
+            android:id="@+id/tik_tok_id"
+            android:icon="@drawable/ic_tiktok_round"
+            android:title="@string/tiktok"></item>
+
+        <item
+            android:id="@+id/youtube_id"
+            android:icon="@drawable/ic_youtube_icon"
+            android:title="@string/youtube"></item>
 
     </group>
+    <group
+        android:id="@+id/share_feature"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/share"
+            android:icon="@drawable/ic_share"
+            android:title="@string/share">
 
-    <group android:checkableBehavior="single">
-        <item android:id="@+id/About_id"
-            android:title="About"
-            android:icon="@drawable/about">
-        </item>
-
-        <item android:id="@+id/Logout_id"
-            android:title="LogOut"
-            android:icon="@drawable/about">
         </item>
     </group>
+
 </menu>

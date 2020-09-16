@@ -1,10 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".fragments.Home">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <!-- TODO: Update blank fragment layout -->
+    <data>
 
-</FrameLayout>
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:elevation="15dp"
+        app:cardCornerRadius="100dp"
+        >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.Home">
+
+
+        <ImageView
+            android:id="@+id/fb_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_facebook"
+            app:layout_constraintBottom_toTopOf="@id/twitter_btn"
+            app:layout_constraintEnd_toStartOf="@id/insta_btn"
+            app:layout_constraintStart_toStartOf="@id/guideline_vertcal_left"
+
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_up" />
+
+
+        <ImageView
+            android:id="@+id/insta_btn"
+            android:layout_width="80dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_instagram"
+            app:layout_constraintTop_toBottomOf="@id/guideline_horizontal_up"
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertcal_right"
+            app:layout_constraintStart_toEndOf="@id/fb_btn"
+            app:layout_constraintBottom_toTopOf="@id/linkedin_btn"
+
+
+            />
+
+        <ImageView
+            android:id="@+id/twitter_btn"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_twitter"
+            app:layout_constraintBottom_toTopOf="@id/tik_tok"
+            app:layout_constraintEnd_toStartOf="@+id/linkedin_btn"
+            app:layout_constraintStart_toEndOf="@id/guideline_vertcal_left"
+            app:layout_constraintTop_toBottomOf="@id/fb_btn" />
+
+        <ImageView
+            android:id="@+id/linkedin_btn"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/ic_linkedin"
+            app:layout_constraintBottom_toTopOf="@+id/youtube"
+            app:layout_constraintEnd_toStartOf="@id/guideline_vertcal_right"
+            app:layout_constraintStart_toEndOf="@id/twitter_btn"
+            app:layout_constraintTop_toBottomOf="@id/insta_btn" />
+
+
+        <ImageView
+            android:id="@+id/tik_tok"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_tiktok_round"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_down"
+            app:layout_constraintEnd_toStartOf="@+id/youtube"
+            app:layout_constraintStart_toStartOf="@+id/guideline_vertcal_left"
+            app:layout_constraintTop_toBottomOf="@+id/twitter_btn" />
+
+        <ImageView
+            android:id="@+id/youtube"
+            android:layout_width="100dp"
+            android:layout_height="80dp"
+            android:src="@drawable/ic_youtube_icon"
+            app:layout_constraintBottom_toTopOf="@+id/guideline_horizontal_down"
+            app:layout_constraintEnd_toStartOf="@+id/guideline_vertcal_right"
+            app:layout_constraintStart_toEndOf="@id/tik_tok"
+            app:layout_constraintTop_toBottomOf="@+id/linkedin_btn" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertcal_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.05" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_vertcal_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.95" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.03" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline_horizontal_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.95" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</layout>
